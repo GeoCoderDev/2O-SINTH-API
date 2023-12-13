@@ -1,0 +1,35 @@
+{
+  "name": "2o-sinth-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeoCoderDev/2O-SINTH-API.git"
+  },
+  "keywords": [
+    "API",
+    "2O-SINTH",
+    "Sintetizador"
+  ],
+  "author": "Juan Chavez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GeoCoderDev/2O-SINTH-API/issues"
+  },
+  "homepage": "https://github.com/GeoCoderDev/2O-SINTH-API#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "properties-reader": "^2.3.0"
+  }
+}
