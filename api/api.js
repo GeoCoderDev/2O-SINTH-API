@@ -1,21 +1,22 @@
 const express = require('express');
-const {isAuthenticated} = require("./api/auth/index");
+const path = require('path');
+const { isAuthenticated } = require(path.join(__dirname, "auth", "index"));
 
-// Importando los Routers
-const {authRouter} = require("./api/routes/Auth");
-const usersRouter = require("./api/routes/Users");
-const presetsRouter = require("./api/routes/Presets");
-const effectsRouter = require("./api//routes/Effects");
-const melodiesRouter = require("./api/routes/Melodies");
-const rhythmsRouter = require("./api/routes/Rhythms");
+// Importing the Routers
+const authRouter = require(path.join(__dirname, "routes", "Auth"));
+const usersRouter = require(path.join(__dirname, "routes", "Users"));
+const presetsRouter = require(path.join(__dirname, "routes", "Presets"));
+const effectsRouter = require(path.join(__dirname, "routes", "Effects"));
+const melodiesRouter = require(path.join(__dirname, "routes", "Melodies"));
+const rhythmsRouter = require(path.join(__dirname, "routes", "Rhythms"));
 
 const API = express.Router();
 
-API.use('/auth' ,authRouter);
+API.use('/auth', authRouter);
 API.use("/users", isAuthenticated, usersRouter);
-API.use("/presets", isAuthenticated, presetsRouter)
+API.use("/presets", isAuthenticated, presetsRouter);
 API.use("/effects", isAuthenticated, effectsRouter);
 API.use("/melodies", isAuthenticated, melodiesRouter);
-API.use('/rhythms', isAuthenticated, rhythmsRouter)
+API.use('/rhythms', isAuthenticated, rhythmsRouter);
 
 module.exports = API;
