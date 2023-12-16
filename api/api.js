@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { isAuthenticated } = require(path.join(__dirname, "auth", "index"));
+const { isAuthenticated } = require(path.join(__dirname, "auth", "index.js"));
 
 // Importing the Routers
 const authRouter = require(path.join(__dirname, "routes", "Auth"));
