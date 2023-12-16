@@ -3,7 +3,7 @@ const path = require('path');
 const { isAuthenticated } = require(path.join(__dirname, "auth", "index.js"));
 
 // Importing the Routers
-const authRouter = require(path.join(__dirname, "routes", "Auth.js"));
+const authRouter = require("./routes/Auth");
 const usersRouter = require(path.join(__dirname, "routes", "Users.js"));
 const presetsRouter = require(path.join(__dirname, "routes", "Presets.js"));
 const effectsRouter = require(path.join(__dirname, "routes", "Effects.js"));
