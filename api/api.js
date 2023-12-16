@@ -1,18 +1,21 @@
 const express = require('express');
+const {isAuthenticated} = require("./auth/index");
 
-// Importando Rutas
-const authRouter = require("./routes/auth");
-const usersRouter = require("./routes/users");
-// const effectsRouter = require("./routes/presets");
-// const presetsRouter = require("./routes/presets");
-// const rhythmsRouter = require("./routes/rhythms");
+// Importando los Routers
+const {authRouter} = require("./routes/Auth");
+const usersRouter = require("./routes/Users");
+const presetsRouter = require("./routes/Presets");
+const effectsRouter = require("./routes/Effects");
+const melodiesRouter = require("./routes/Melodies");
+const rhythmsRouter = require("./routes/Rhythms");
 
 const API = express.Router();
 
-API.use("/users", usersRouter);
-API.use('/auth', authRouter);
-// API.use("/effects", effectsRouter);
-// API.use("/presets", presetsRouter);
-// API.use('/rhythms', rhythmsRouter)
+API.use('/auth' ,authRouter);
+API.use("/users", isAuthenticated, usersRouter);
+API.use("/presets", isAuthenticated, presetsRouter)
+API.use("/effects", isAuthenticated, effectsRouter);
+API.use("/melodies", isAuthenticated, melodiesRouter);
+API.use('/rhythms', isAuthenticated, rhythmsRouter)
 
 module.exports = API;

@@ -15,6 +15,7 @@ const app = express();
 
 // Cadena de Middlewares
 app.use(body_parser.urlencoded({extended:false}));
+app.use(body_parser.json());
 app.use(cors());
 app.use(methodOverride());
 app.use(methodOverride('X-HTTP-Method-Override')); 
@@ -37,8 +38,3 @@ sequelize.sync()
     })
 
 app.listen(PORT);
-
-// const crypto = require("crypto");
-// crypto.randomBytes(16,(err, salt)=>{
-//     if(!err) console.log(salt.toString("base64"));
-// })
