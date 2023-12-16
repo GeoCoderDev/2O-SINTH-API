@@ -1,9 +1,9 @@
 
 const PropertiesReader = require("properties-reader");
 const {Sequelize} = require("sequelize");
-
 const path = require("path");
 const propertiesPath = path.join(__dirname, "db.properties");
+
 const properties = PropertiesReader(propertiesPath);
 
 const sequelize = new Sequelize(

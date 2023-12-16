@@ -1,13 +1,13 @@
 const express = require('express');
-const {isAuthenticated} = require("./auth/index");
+const {isAuthenticated} = require("./api/auth/index");
 
 // Importando los Routers
-const {authRouter} = require("./routes/Auth");
-const usersRouter = require("./routes/Users");
-const presetsRouter = require("./routes/Presets");
-const effectsRouter = require("./routes/Effects");
-const melodiesRouter = require("./routes/Melodies");
-const rhythmsRouter = require("./routes/Rhythms");
+const {authRouter} = require("./api/routes/Auth");
+const usersRouter = require("./api/routes/Users");
+const presetsRouter = require("./api/routes/Presets");
+const effectsRouter = require("./api//routes/Effects");
+const melodiesRouter = require("./api/routes/Melodies");
+const rhythmsRouter = require("./api/routes/Rhythms");
 
 const API = express.Router();
 
