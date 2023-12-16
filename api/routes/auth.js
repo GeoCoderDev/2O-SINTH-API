@@ -113,4 +113,4 @@ authRouter.get("/me", isAuthenticated, (req, res) => {
   res.status(200).send({ Name, Email });
 });
 
-module.exports.authRouter = authRouter;
+module.exports = authRouter;
