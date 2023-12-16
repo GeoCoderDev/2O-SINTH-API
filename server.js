@@ -14,13 +14,12 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // Cadena de Middlewares
-app.use(body_parser.urlencoded({extended:false}));
-app.use(body_parser.json());
-app.use(cors());
-app.use(methodOverride());
-app.use(methodOverride('X-HTTP-Method-Override')); 
-app.use(body_parser.json());
-app.use(morgan("dev"));
+app.use(morgan('dev')); // Logging de desarrollo
+app.use(body_parser.urlencoded({ extended: false })); // Parsea las solicitudes con cuerpo x-www-form-urlencoded
+app.use(body_parser.json()); // Parsea las solicitudes con cuerpo JSON
+app.use(cors()); // Configuración básica para permitir solicitudes desde cualquier origen
+app.use(methodOverride()); // Soporte para HTTP method override
+app.use(methodOverride('X-HTTP-Method-Override')); // Soporte adicional para HTTP method override
 
 // Haciendo uso de la API 
 app.use('/api', API);
