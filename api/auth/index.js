@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { getUserById } = require("../controllers/User");
-const PrivateKey = "2O-SINTH-SECRET";
+const PrivateKey = process.env.PRIVATE_KEY;
 const express = require("express");
 
 /**

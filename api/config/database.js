@@ -6,30 +6,15 @@ const path = require("path");
 const propertiesPath = path.join(__dirname, "db.properties");
 const properties = PropertiesReader(propertiesPath);
 
-
 const sequelize = new Sequelize(
-  properties.get("db.database"),
-  properties.get("db.user"),
-  properties.get("db.password"),
+  process.env.DB_DATABASE,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: properties.get("db.host"),
+    host: process.env.DB_HOST,
     dialect: "mysql",
   }
 );
 
 
 module.exports = sequelize;
-
-
-// Ejemplo de consulta
-// connection.query("SELECT * FROM Usuarios", (error, results, fields) => {
-//     if (error) {
-//       console.error("Error en la consulta:", error);
-//     } else {
-//       console.log("Resultados de la consulta:", results);
-//     }
-  
-//     connection.end(); // Cierra la conexión después de la consulta
-// });
-
-// module.exports = connection;
