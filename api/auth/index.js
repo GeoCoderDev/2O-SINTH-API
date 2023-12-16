@@ -17,11 +17,11 @@ const isAuthenticated = (req, res, next) => {
   if (!token) return res.status(403);
 
   jwt.verify(token, PrivateKey, (err, decoded) => {
+
     if (err) {
-      console.log(err);
-      return res
-        .status(401)
-        .send({ auth: false, message: "Failed to authenticate" });
+      if (err.name === 'TokenExpiredError') {
+        return res.status(401).send({ auth: false, message: "Token expired" });
+      };
     }
 
     const { Id } = decoded;
