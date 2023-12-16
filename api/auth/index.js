@@ -14,14 +14,19 @@ const isAuthenticated = (req, res, next) => {
   const token = req.headers.authorization;
 
   // Denial of authorization
-  if (!token) return res.status(403);
+  if (!token)
+    return res
+      .status(403)
+      .send({
+        auth: false,
+        message: "You do not have permission to access this resource",
+      });
 
   jwt.verify(token, PrivateKey, (err, decoded) => {
-
     if (err) {
-      if (err.name === 'TokenExpiredError') {
+      if (err.name === "TokenExpiredError") {
         return res.status(401).send({ auth: false, message: "Token expired" });
-      };
+      }
     }
 
     const { Id } = decoded;
