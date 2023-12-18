@@ -55,7 +55,7 @@ authRouter.post("/register", (req, res) => {
 
       findOneUserByNameOrEmail(Name, Email)        
         .then((userData) => {
-          let user = JSON.parse(userData.toJSON());
+          let user = userData.toJSON();
           if (user) {
             if (user.Name === Name) return res.status(409).send("NAME");
             if (user.Name === Email) return res.status(409).send("EMAIL");
