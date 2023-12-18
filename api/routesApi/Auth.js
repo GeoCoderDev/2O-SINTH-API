@@ -83,7 +83,7 @@ authRouter.post("/login", (req, res) => {
 
   findOneUserByNameOrEmail(Name, Email).then((userFound) => {
     if (!userFound)
-      return res.status(401).send("Incorrect username and/or password");
+      return res.status(401).send("Incorrect username or email");
 
     crypto.pbkdf2(
       Password,
@@ -102,6 +102,8 @@ authRouter.post("/login", (req, res) => {
         if (userFound.Password === encryptedPassword) {
           const token = signToken(userFound.Id);
           return res.status(200).send({ token });
+        }else{
+          return res.status(401).send("Incorrect password");
         }
       }
     );
