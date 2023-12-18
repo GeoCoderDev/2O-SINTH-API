@@ -19,7 +19,7 @@ const isAuthenticated = (req, res, next) => {
       .status(403)
       .send({
         auth: false,
-        message: "You do not have permission to access this resource",
+        message: "No Authorizated",
       });
 
   jwt.verify(token, PrivateKey, (err, decoded) => {

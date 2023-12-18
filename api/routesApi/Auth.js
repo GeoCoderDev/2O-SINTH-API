@@ -83,7 +83,7 @@ authRouter.post("/login", (req, res) => {
 
   findOneUserByNameOrEmail(Name, Email).then((userFound) => {
     if (!userFound)
-      return res.status(201).send("Incorrect username and/or password");
+      return res.status(401).send("Incorrect username and/or password");
 
     crypto.pbkdf2(
       Password,
