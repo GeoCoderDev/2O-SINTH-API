@@ -59,6 +59,7 @@ authRouter.post("/register", (req, res) => {
             if(user.Name === Name) return res.status(409).send("NAME");
             if(user.Name === Email) return res.status(409).send("EMAIL");
           }
+          console.log(user);
           
           createUser({
             Name: Name,
