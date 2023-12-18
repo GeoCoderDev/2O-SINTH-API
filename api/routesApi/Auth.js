@@ -55,8 +55,11 @@ authRouter.post("/register", (req, res) => {
 
       findOneUserByNameOrEmail(Name, Email)
         .then((user) => {
-          if (user) return res.status(409).send("User already exists");
-
+          if (user) {
+            if(user.Name === Name) return res.status(409).send("NAME");
+            if(user.Name === Email) return res.status(409).send("EMAIL");
+          }
+          
           createUser({
             Name: Name,
             Email: Email,
@@ -82,8 +85,7 @@ authRouter.post("/login", (req, res) => {
   const { Name, Email, Password } = req.body;
 
   findOneUserByNameOrEmail(Name, Email).then((userFound) => {
-    if (!userFound)
-      return res.status(401).send("Incorrect username or email");
+    if (!userFound) return res.status(401).send("Incorrect username or email");
 
     crypto.pbkdf2(
       Password,
@@ -102,7 +104,7 @@ authRouter.post("/login", (req, res) => {
         if (userFound.Password === encryptedPassword) {
           const token = signToken(userFound.Id);
           return res.status(200).send({ token });
-        }else{
+        } else {
           return res.status(401).send("Incorrect password");
         }
       }
