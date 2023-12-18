@@ -59,8 +59,8 @@ authRouter.post("/register", (req, res) => {
             if(user.Name === Name) return res.status(409).send("NAME");
             if(user.Name === Email) return res.status(409).send("EMAIL");
           }
-          console.log(user);
-          
+          console.log(user.toJSON());
+
           createUser({
             Name: Name,
             Email: Email,
@@ -81,6 +81,58 @@ authRouter.post("/register", (req, res) => {
     });
   });
 });
+
+// authRouter.post("/register", async (req, res) => {
+//   const { Name, Email, Password } = req.body;
+
+//   try {
+//     const user = await findOneUserByNameOrEmail(Name, Email);
+
+//     if (user) {
+//       if (user.Name === Name) {
+//         return res.status(409).send("Nombre de usuario ya existe");
+//       }
+//       if (user.Email === Email) {
+//         return res.status(409).send("Correo electrónico ya registrado");
+//       }
+//     }
+
+//     crypto.randomBytes(saltLengthBytes, (err, salt) => {
+//       if (err) {
+//         return res.status(500).send(err.message);
+//       }
+
+//       const newSalt = salt.toString("base64");
+
+//       crypto.pbkdf2(Password, newSalt, iterations, lenKey, digest, async (err, key) => {
+//         if (err) {
+//           return res.status(500).send(err.message);
+//         }
+
+//         const encryptedPassword = key.toString("base64");
+
+//         try {
+//           await createUser({
+//             Name: Name,
+//             Email: Email,
+//             Password: encryptedPassword,
+//             Salt: newSalt,
+//           });
+
+//           res.status(201).send("Usuario creado exitosamente");
+//         } catch (createError) {
+//           res.status(500).send("No se pudo crear el usuario");
+//         }
+//       });
+//     });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send(error.message);
+//   }
+// });
+
+
 
 authRouter.post("/login", (req, res) => {
   const { Name, Email, Password } = req.body;
