@@ -53,13 +53,13 @@ authRouter.post("/register", (req, res) => {
 
       const encryptedPassword = key.toString("base64");
 
-      findOneUserByNameOrEmail(Name, Email)
-        .then((user) => {
+      findOneUserByNameOrEmail(Name, Email)        
+        .then((userData) => {
+          let user = JSON.parse(userData.toJSON());
           if (user) {
-            if(user.Name === Name) return res.status(409).send("NAME");
-            if(user.Name === Email) return res.status(409).send("EMAIL");
+            if (user.Name === Name) return res.status(409).send("NAME");
+            if (user.Name === Email) return res.status(409).send("EMAIL");
           }
-          console.log(user.toJSON());
 
           createUser({
             Name: Name,
@@ -131,8 +131,6 @@ authRouter.post("/register", (req, res) => {
 //     res.status(500).send(error.message);
 //   }
 // });
-
-
 
 authRouter.post("/login", (req, res) => {
   const { Name, Email, Password } = req.body;
