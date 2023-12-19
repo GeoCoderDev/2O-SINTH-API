@@ -37,6 +37,10 @@ const saltLengthBytes = 16;
 authRouter.post("/register", (req, res) => {
   const { Name, Email, Password } = req.body;
 
+  if(Name?.length>20) return res.status(400).send('Username too long(length must be less than 20)');    
+  if(Email?.length>40) return res.status(400).send("Email too long(length must be less than 40)");
+  if(Password?.length>20) return res.status(400).send("Password too long(length must be less than 20)");
+
   crypto.randomBytes(saltLengthBytes, (err, salt) => {
     // Internal Server Error
     if (err) {
@@ -135,6 +139,10 @@ authRouter.post("/register", (req, res) => {
 authRouter.post("/login", (req, res) => {
   const { Name, Email, Password } = req.body;
 
+  if(Name?.length>20) return res.status(400).send('Username too long(length must be less than 20)');    
+  if(Email?.length>40) return res.status(400).send("Email too long(length must be less than 40)");
+  if(Password?.length>20) return res.status(400).send("Password too long(length must be less than 20)");
+
   findOneUserByNameOrEmail(Name, Email).then((userFound) => {
     if (!userFound) return res.status(401).send("INCORRECT_USERNAME_OR_EMAIL");
 
@@ -149,6 +157,8 @@ authRouter.post("/login", (req, res) => {
           res.status(500);
           return console.log(err);
         }
+
+        
 
         const encryptedPassword = key.toString("base64");
 
