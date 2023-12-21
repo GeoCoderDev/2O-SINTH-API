@@ -12,7 +12,7 @@ effectsRouter.post("/", (req, res) => {
 
   getEffectsByNameAndUserId(Name, req.body.userData.Id)
     .then((effectFinded)=>{
-      if(effectFinded) return res.status(409).send();
+      if(effectFinded.length>0) return res.status(409).send();
 
       addEffect({
         Name: Name,

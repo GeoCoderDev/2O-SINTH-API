@@ -13,10 +13,7 @@ melodiesRouter.post("/", (req, res) => {
   getMelodiesByNameAndUserId(Name, req.body.userData.Id)
     .then((melodyFinded)=>{
 
-      console.log(melodyFinded);
-      console.log(melodyFinded.toJSON());
-
-      if(melodyFinded) return res.status(409).send();
+      if(melodyFinded.length>0) return res.status(409).send();
       
       addMelody({
         Name: Name,

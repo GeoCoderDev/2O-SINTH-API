@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 3000;
 // Sincronizando ORM con Base de Datos
 sequelize.sync()
     .then(()=>{
-        console.log("Le logro la sincronizacion");
+        console.log("Se logro la sincronizacion");
     })
     .catch((e)=>{
         console.log(e);

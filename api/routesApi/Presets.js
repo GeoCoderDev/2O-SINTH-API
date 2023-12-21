@@ -13,7 +13,7 @@ presetsRouter.post("/", (req, res) => {
   getPresetsByNameAndUserId(Name, req.body.userData.Id)
     .then((presetFinded) => {
 
-      if(presetFinded) return res.status(409).send();
+      if(presetFinded.length>0) return res.status(409).send();
 
       addPreset({
         Name: Name,
