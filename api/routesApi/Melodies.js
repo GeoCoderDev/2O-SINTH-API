@@ -9,7 +9,7 @@ const {
 
 melodiesRouter.post("/", (req, res) => {
   const { Name, Melody } = req.body;
-
+  console.log(req.body);
   addMelody({
     Name: Name,
     Melody: Melody,
