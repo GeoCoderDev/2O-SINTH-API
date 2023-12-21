@@ -10,17 +10,26 @@ const {
 presetsRouter.post("/", (req, res) => {
   const { Name, Preset } = req.body;
 
-  addPreset({
-    Name: Name,
-    Preset: Preset,
-    User_Id: req.body.userData.Id,
-  })
-    .then(() => {
-      res.status(201).send("Preset Added!");
+  getPresetsByNameAndUserId(Name, req.body.userData.Id)
+    .then((presetFinded) => {
+
+      if(presetFinded) return res.status(409).send();
+
+      addPreset({
+        Name: Name,
+        Preset: Preset,
+        User_Id: req.body.userData.Id,
+      })
+        .then(() => {
+          res.status(201).send("Preset Added!");
+        })
+        .catch((err) => {
+          res.status(500).send("Could not create Preset");
+          return console.log(err);
+        });
     })
     .catch((err) => {
-      res.status(500).send("Could not create Preset");
-      return console.log(err);
+      console.log(err);
     });
 });
 

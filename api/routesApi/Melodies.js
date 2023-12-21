@@ -9,18 +9,29 @@ const {
 
 melodiesRouter.post("/", (req, res) => {
   const { Name, Melody } = req.body;
-  addMelody({
-    Name: Name,
-    Melody: Melody,
-    User_Id: req.body.userData.Id,
-  })
-    .then(() => {
-      res.status(201).send("Melody Added!");
+
+  getMelodiesByNameAndUserId(Name, req.body.userData.Id)
+    .then((melodyFinded)=>{
+
+      if(melodyFinded) return res.status(409).send();
+      
+      addMelody({
+        Name: Name,
+        Melody: Melody,
+        User_Id: req.body.userData.Id,
+      })
+        .then(() => {
+          res.status(201).send("Melody Added!");
+        })
+        .catch((err) => {
+          res.status(500).send("Could not create Melody");
+          return console.log(err);
+        });    
+
+    }).catch((e)=>{
+      console.log(e)
     })
-    .catch((err) => {
-      res.status(500).send("Could not create Melody");
-      return console.log(err);
-    });
+
 });
 
 melodiesRouter.get("/", (req, res) => {

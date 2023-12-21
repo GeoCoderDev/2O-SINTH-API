@@ -12,18 +12,28 @@ const { getPresetsByNameAndUserId } = require("../controllers/Preset");
 rhythmRouter.post("/", (req, res) => {
   const { Name, Rhythm } = req.body;
 
-  addPreset({
-    Name: Name,
-    Rhythm: Rhythm,
-    User_Id: req.body.userData.Id,
-  })
-    .then(() => {
-      res.status(201).send("Rhythm Added!");
+  getRhythmsByNameAndUserId(Name, req.body.userData.Id)
+    .then((rhythmFinded)=>{
+
+      if(rhythmFinded) return res.status(409).send();
+
+      addPreset({
+        Name: Name,
+        Rhythm: Rhythm,
+        User_Id: req.body.userData.Id,
+      })
+        .then(() => {
+          res.status(201).send("Rhythm Added!");
+        })
+        .catch((err) => {
+          res.status(500).send("Could not create Rhythm");
+          return console.log(err);
+        });
+
+    }).catch((err)=>{
+      console.error(err)
     })
-    .catch((err) => {
-      res.status(500).send("Could not create Rhythm");
-      return console.log(err);
-    });
+
 });
 
 rhythmRouter.get("/", (req, res) => {

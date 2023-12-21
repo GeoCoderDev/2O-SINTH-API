@@ -10,18 +10,28 @@ const {
 effectsRouter.post("/", (req, res) => {
   const { Name, Effect } = req.body;
 
-  addEffect({
-    Name: Name,
-    Effect: Effect,
-    User_Id: req.body.userData.Id,
-  })
-    .then(() => {
-      res.status(201).send("Effect Added!");
+  getEffectsByNameAndUserId(Name, req.body.userData.Id)
+    .then((effectFinded)=>{
+      if(effectFinded) return res.status(409).send();
+
+      addEffect({
+        Name: Name,
+        Effect: Effect,
+        User_Id: req.body.userData.Id,
+      })
+        .then(() => {
+          res.status(201).send("Effect Added!");
+        })
+        .catch((err) => {
+          res.status(500).send("Could not create Effect");
+          return console.log(err);
+        });
+
+    }).catch((err)=>{
+      console.log(err)
     })
-    .catch((err) => {
-      res.status(500).send("Could not create Effect");
-      return console.log(err);
-    });
+
+
 });
 
 effectsRouter.get("/", (req, res) => {
