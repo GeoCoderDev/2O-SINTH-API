@@ -17,7 +17,7 @@ rhythmRouter.post("/", (req, res) => {
 
       if(rhythmFinded.length>0) return res.status(409).send();
 
-      addPreset({
+      addRhythm({
         Name: Name,
         Rhythm: Rhythm,
         User_Id: req.body.userData.Id,
