@@ -37,7 +37,11 @@ exports.addPreset = async (preset) => {
  */
 exports.getPresetsByNameAndUserId = async (name, userId) => {
   try {
-    return await Preset.findAll({ where: { Name: name, User_Id: userId } });
+    return await Preset.findAll({
+      attributes: ["Name", "Preset"],
+      raw: true,
+      where: { Name: name, User_Id: userId },
+    });
   } catch (err) {
     throw err;
   }
@@ -49,7 +53,11 @@ exports.getPresetsByNameAndUserId = async (name, userId) => {
  */
 exports.getAllPresetsByUserId = async (userId) => {
   try {
-    return await Preset.findAll({ where: { User_Id: userId } });
+    return await Preset.findAll({
+      attributes: ["Name", "Preset"],
+      raw: true,
+      where: { User_Id: userId },
+    });
   } catch (err) {
     throw err;
   }

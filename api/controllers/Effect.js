@@ -35,7 +35,11 @@ exports.addEffect = async (effect) => {
  */
 exports.getEffectsByNameAndUserId = async (name, userId) => {
   try {
-    return await Effect.findAll({ where: { Name: name, User_Id: userId } });
+    return await Effect.findAll({
+      attributes: ["Name", "Effect"],
+      raw: true,
+      where: { Name: name, User_Id: userId },
+    });
   } catch (err) {
     throw err;
   }
@@ -47,7 +51,11 @@ exports.getEffectsByNameAndUserId = async (name, userId) => {
  */
 exports.getAllEffectsByUserId = async (userId) => {
   try {
-    return await Effect.findAll({ where: { User_Id: userId } });
+    return await Effect.findAll({
+      attributes: ["Name", "Effect"],
+      raw: true,
+      where: { User_Id: userId },
+    });
   } catch (err) {
     throw err;
   }

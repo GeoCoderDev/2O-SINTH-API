@@ -37,7 +37,11 @@ exports.addMelody = async (melody) => {
  */
 exports.getMelodiesByNameAndUserId = async (Name, userId) => {
   try {
-    return await Melody.findAll({ where: { Name: Name, User_Id: userId } });
+    return await Melody.findAll({
+      attributes: ["Name", "Melody"],
+      raw: true,
+      where: { Name: Name, User_Id: userId },
+    });
   } catch (err) {
     throw err;
   }
@@ -49,7 +53,11 @@ exports.getMelodiesByNameAndUserId = async (Name, userId) => {
  */
 exports.getAllMelodiesByUserId = async (userId) => {
   try {
-    return await Melody.findAll({ where: { User_Id: userId } });
+    return await Melody.findAll({
+      attributes: ["Name", "Melody"],
+      raw: true,
+      where: { User_Id: userId },
+    });
   } catch (err) {
     throw err;
   }
