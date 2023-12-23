@@ -42,6 +42,7 @@ exports.createUser = async (dataUser) => {
 exports.findOneUserByNameOrEmail = async (name=null, email=null) => {    
   try {
     return await User.findOne({
+      raw:true,
       where: {
         [Op.or]: [{ Name: name }, { Email: email }],
       },

@@ -59,8 +59,8 @@ authRouter.post("/register", (req, res) => {
 
       findOneUserByNameOrEmail(Name, Email)        
         .then((userData) => {
-          let user = userData.toJSON();
-          if (user) {
+          console.log(userData)
+          if (userData) {
             if (user.Name === Name) return res.status(409).send("NAME");
             if (user.Email === Email) return res.status(409).send("EMAIL");
           }
@@ -157,8 +157,6 @@ authRouter.post("/login", (req, res) => {
           res.status(500);
           return console.log(err);
         }
-
-        
 
         const encryptedPassword = key.toString("base64");
 
