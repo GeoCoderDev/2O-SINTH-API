@@ -12,10 +12,6 @@ const rhythmsRouter = require(path.join(__dirname, "routesApi", "Rhythms.js"));
 
 const API = express.Router();
 
-// Root route with welcome message
-API.get('/', (req, res) => {
-    res.send('Bienvenido a la API de 2O-SINTH');
-});
 
 API.use('/auth', authRouter);
 API.use("/users", isAuthenticated, usersRouter);
