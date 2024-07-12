@@ -12,11 +12,17 @@ const rhythmsRouter = require(path.join(__dirname, "routesApi", "Rhythms.js"));
 
 const API = express.Router();
 
+// Root route with welcome message
+API.get('/', (req, res) => {
+    res.send('Bienvenido a la API de 2O-SINTH');
+});
+
 API.use('/auth', authRouter);
 API.use("/users", isAuthenticated, usersRouter);
 API.use("/presets", isAuthenticated, presetsRouter);
 API.use("/effects", isAuthenticated, effectsRouter);
 API.use("/melodies", isAuthenticated, melodiesRouter);
 API.use('/rhythms', isAuthenticated, rhythmsRouter);
+
 
 module.exports = API;
